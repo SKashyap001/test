@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Triplytics</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">Triplytics</div>
+    <div class="top-bar">
+        <div class="contact-wrapper">
+          <span id="phone-number" class="phone hidden">📞 +91 9266688661</span>
+          <button class="contact-btn" onclick="togglePhone()">Contact Us</button>
+        </div>
+    </div>
+  </div>
+
+  <!-- Video Section -->
+  <div class="video-container">
+    <video id="video" autoplay muted loop playsinline>
+      <source src="static/introvideo.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div id="overlay-text" class="video-overlay-text hidden">Travel Simplified</div>
+  </div>
+
+  <section class="about-section">
+    <div class="about-container">
+      <h2 class="about-heading">About Us</h2>
+      <p class="about-content">
+        Imagine a booking platform so intelligent, it understands your customers’ needs and curates journeys based on their preferences.
+        Our platform is transparent, intuitive, and integrates seamlessly with your existing system. 
+        No hidden charges — just seamless vacation for your travellers.
+      </p>
+    </div>
+  </section>
+
+  <section class="why-section">
+    <div class="why-container">
+      <h2 class="why-heading hidden">Why Join Us</h2>
+      <div class="why-cards hidden">
+        <div class="why-card"><strong>Reduced Cost of Ownership:</strong> Eliminate the need for manual itinerary creation with a no-complex plug and play integration.</div>
+        <div class="why-card"><strong>Highly Customizable:</strong> Turn every client trip into a memorable journey with customized journeys as per their preference.</div>
+        <div class="why-card"><strong>Faster Turnaround:</strong> Maximize your earnings with faster, error-free booking processes.</div>
+        <div class="why-card"><strong>Instant Support:</strong> From integration to booking, we provide reliable, real-time support across every touchpoint.</div>
+        <div class="why-card"><strong>Access to Global Inventory:</strong> Get access to our global marketplace through a single intelligent platform.</div>
+        <div class="why-card"><strong>Secure User Data:</strong> We use end-to-end encryption from the first click to the final booking so your data remains safe and private.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="image-section">
+    <img src="static/triplyticsimg.jpg" alt="Triplytics Preview" class="full-width-image" />
+    <div class="image-overlay-content">
+      <h2>Latest Blogs</h2>
+      <a href="https://medium.com/@bellblazetechnologies24/gone-are-the-days-when-manual-processes-were-considered-a-competitive-approach-in-the-travel-and-788772de0ae6" target="_blank" class="read-more-btn">Read more</a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>Triplytics</h3>
+        <p>Travel Simplified</p>
+      </div>
+  
+      <div class="footer-links">
+        <a href="#">Home</a>
+        <a href="#about">About</a>
+        <a href="#blogs">Blog</a>
+        <a href="#contact">Contact</a>
+      </div>
+  
+      <div class="footer-contact">
+        <p><strong>Address</strong><br>G-03, Ground Floor, VDS Work<br> Eutopia Business Park, H-159, Sector-<br>63, Noida-201301</p>
+        <p><strong>Email</strong> <a href="mailto:support@triplytics.com"><br>info@triplytics.in</a></p>
+      </div>
+    </div>
+  
+    <div class="footer-bottom">
+      <p>© 2025 Triplytics. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function showMessage() {
+      alert("Welcome to Triplytics! 🚀");
+    }
+
+    function togglePhone() {
+        const phone = document.getElementById('phone-number');
+        phone.classList.toggle('hidden');
+        phone.classList.toggle('show');
+    }
+
+    window.onload = () => {
+      document.querySelector('.logo').classList.add('animate');
+
+      const video = document.getElementById('video');
+      const overlayText = document.getElementById('overlay-text');
+
+      video.addEventListener('playing', () => {
+        overlayText.classList.remove('hidden');
+        overlayText.classList.add('slide-in');
+      });
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              document.querySelector('.about-heading').classList.add('animate-right');
+              document.querySelector('.about-content').classList.add('animate-left');
+              observer.disconnect(); // only trigger once
+            }
+          });
+        },
+        {
+          threshold: 0.3
+        }
+      );
+    
+      observer.observe(document.querySelector('.about-section'));
+
+      const whyObserver = new IntersectionObserver(
+        entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+            const heading = document.querySelector('.why-heading');
+            const cards = document.querySelector('.why-cards');
+
+            heading.classList.remove('hidden');
+            cards.classList.remove('hidden');
+
+            heading.classList.add('animate-left');
+            cards.classList.add('animate-right');
+
+            whyObserver.disconnect();
+            }
+        });
+        },
+        { threshold: 0.3 }
+    );
+
+    whyObserver.observe(document.querySelector('.why-section'));
+    const blogObserver = new IntersectionObserver(
+        entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+            const blogOverlay = document.querySelector('.image-overlay-content');
+            blogOverlay.classList.remove('hidden');
+            blogOverlay.classList.add('animate-left-fade');
+            blogObserver.disconnect(); // only once
+            }
+        });
+        },
+        { threshold: 0.4 }
+    );
+
+    blogObserver.observe(document.querySelector('.image-overlay-content'));
+    };
+  </script>
+</body>
+</html>
+
